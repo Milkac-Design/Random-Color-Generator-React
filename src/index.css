@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  background-color:whitesmoke;
-
+  background-color: whitesmoke;
+  font-size: 16px;
 }
 .outter-box {
   background-color: rgb(159, 192, 221);
@@ -11,8 +11,8 @@ body {
 
   margin: 50px;
 }
-.color-boxes{
-display: flex;
+.color-boxes {
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -23,7 +23,7 @@ display: flex;
   border: 2px solid black;
 }
 
-button{
+button {
   height: 50px;
   margin: 10px;
   border-radius: 5px;

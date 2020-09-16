@@ -1,35 +1,63 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './index.css';
+import './index.css';
+import randomColor from 'randomcolor';
 
 function RandomColor() {
-  const [hex, setHex] = useState('#ffffff');
-  const [hex2, setHex2] = useState('#ffffff');
-  const [color, setColor] = useState('');
+  const [hex, setHex] = useState('#ffffff'); // set up for random color
+
+  const [hue, setHue] = useState(''); // setup for user color
+
+  const [luminosity, setLuminosity] = useState('');
+  //setup for randomizing user hue to color
+
+  const [color, setColor] = useState(
+    randomColor({ hue: hue, luminosity: luminosity }),
+  );
+
+  //function to call random color (setHex updates hex)
   const setBckground = () => {
-    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    setHex(randomColor);
+    const userColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    setHex(userColor);
   };
-  const setBckground2 = () => {
-    const randomColor2 =
-      '#' + Math.floor(Math.random() * 16777215).toString(16);
-    setHex2(randomColor2);
-  };
-  const userColor = () => {
-    const choosenColor = '';
-    setColor(choosenColor);
+
+  //trying to make submit button submit the color rather than
+  const handleSubmit = (e) => {
+    setColor(randomColor({ hue: hue }));
+    setLuminosity(randomColor({ luminosity: luminosity }));
+    e.preventDefault();
   };
 
   return (
     <div>
       <div className="outter-box">
         <button onClick={setBckground}>Change color in box 1</button>
-        <button onClick={setBckground2}>Change color in box 2</button>
-        <label>
-          Choose a color:
-          <input type="text" onClick={(e) => setColor(e.target.value)} />
-        </label>
-        <input type="submit" value="Submit" />
+
+        <form onSubmit={handleSubmit}>
+          <label>
+            Choose a color for box 2:
+            <input type="text" onChange={(e) => setHue(e.target.value)} />
+            <input type="submit" value="Submit" />
+          </label>
+          <br></br>
+          <label>
+            Choose the luminosity:
+            <input
+              type="radio"
+              id="light"
+              name="luminosity"
+              onChange={(e) => setColor(randomColor({ luminosity: 'light' }))}
+            />
+            <label for="light">Light</label>
+            <input
+              type="radio"
+              id="dark"
+              name="luminosity"
+              onChange={(e) => setColor(randomColor({ luminosity: 'dark' }))}
+            />
+            <label for="dark">Dark</label>
+          </label>
+        </form>
         <div className="color-boxes">
           <div
             className="box"
@@ -40,7 +68,7 @@ function RandomColor() {
           <div
             className="box"
             style={{
-              backgroundColor: `${color}`,
+              backgroundColor: `${color}`, //make new variable to track random color
             }}
           ></div>
         </div>
