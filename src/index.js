@@ -23,8 +23,8 @@ function RandomColor() {
 
   //trying to make submit button submit the color rather than
   const handleSubmit = (e) => {
-    setColor(randomColor({ hue: hue }));
-    setLuminosity(randomColor({ luminosity: luminosity }));
+    setColor(randomColor({ hue: hue, luminosity: luminosity }));
+    // setColor(randomColor({ luminosity: luminosity }));
     e.preventDefault();
   };
 
@@ -46,14 +46,14 @@ function RandomColor() {
               type="radio"
               id="light"
               name="luminosity"
-              onChange={(e) => setColor(randomColor({ luminosity: 'light' }))}
+              onChange={(e) => setLuminosity('light')}
             />
             <label for="light">Light</label>
             <input
               type="radio"
               id="dark"
               name="luminosity"
-              onChange={(e) => setColor(randomColor({ luminosity: 'dark' }))}
+              onChange={(e) => setLuminosity('dark')}
             />
             <label for="dark">Dark</label>
           </label>
